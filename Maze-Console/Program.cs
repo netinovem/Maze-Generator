@@ -44,7 +44,7 @@ namespace Maze_Console
             img.SaveAsPng("C:\\Users\\netinova\\Desktop\\Maze\\Maze-Console\\generated-mazes\\maze3.png");
             Process.Start(new ProcessStartInfo("C:\\Users\\netinova\\Desktop\\Maze\\Maze-Console\\generated-mazes\\maze3.png") { UseShellExecute = true });
 
-
+            //test
             //distancesMap = start.Distances();
             //var (newStart, maxDistance) = distancesMap.Max();
             //Distances newDistancesMap = newStart.Distances();
