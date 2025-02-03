@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Maze_Console
+﻿namespace Maze_Console
 {
     internal class Wilsons
     {
@@ -32,12 +26,12 @@ namespace Maze_Console
                 {
                     cell = cell.Neighbors()[new Random().Next(cell.Neighbors().Count)];
 
-                    //check if we have already visited this cell  
+                    //check if we have already visited this cell
                     int position = path.IndexOf(cell);
 
                     if (position >= 0)
                     {
-                        //if we have visited the cell, erase the loop in the path  
+                        //if we have visited the cell, erase the loop in the path
                         path = path.GetRange(0, position + 1); //DIDN't UNDERSTAND this line tbh TvT
                     }
                     else path.Add(cell);

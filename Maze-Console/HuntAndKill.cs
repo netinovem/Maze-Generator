@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Maze_Console
+﻿namespace Maze_Console
 {
     internal class HuntAndKill
     {
@@ -37,11 +31,13 @@ namespace Maze_Console
                         {
                             if (neighbor.links.Count > 0) visitedNeighbors.Add(neighbor);
                         }
+
                         if (cell.links.Count == 0 && visitedNeighbors.Count > 0)
                         {
                             current = cell;
                             Cell neighbor = visitedNeighbors[new Random().Next(visitedNeighbors.Count)];
                             current.Link(neighbor);
+                            break;
                         }
                     }
                 }

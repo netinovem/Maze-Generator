@@ -1,13 +1,11 @@
 ﻿using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.ColorSpaces;
-using ColorHelper;
-
 
 namespace Maze_Console
 {
     internal class ColoredGrid : Grid
     {
         public Distances _distanceMap;
+
         public Distances distanceMap
         {
             get { return _distanceMap; }
@@ -40,8 +38,8 @@ namespace Maze_Console
             // SINGLE SHADE OF COLOR
             float intensity = (float)(maximum - distance) / maximum;
             byte bright = (byte)(intensity * 200);
-            byte dark = (byte)(30 * intensity);
-            return Color.FromRgb(dark, bright, dark);
+            byte dark = (byte)(50 * intensity);
+            return Color.FromRgb(bright, dark, bright);
 
             // MORE COLORFUL VERSION
             //int hue = (int)Math.Floor(100 - (100 * ((decimal)distance / maximum)));

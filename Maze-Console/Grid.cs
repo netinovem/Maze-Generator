@@ -167,7 +167,6 @@ namespace Maze_Console
             Image<Rgba64> image = new Image<Rgba64>(imgWidth + 1, imgHeight + 1);
             image.Mutate(ctx => ctx.BackgroundColor(Color.White)); // Set background to white
 
-
             foreach (var mode in new[] { "background", "wall" })
             {
                 foreach (var cell in EachCell())
@@ -204,8 +203,21 @@ namespace Maze_Console
                     }
                 }
             }
-            
+
             return image;
+        }
+
+        public List<Cell> DeadEnds()
+        {
+            List<Cell> deadEnds = new List<Cell>();
+            foreach (var cell in EachCell())
+            {
+                if (cell.Links().Count() == 1)
+                {
+                    deadEnds.Add(cell);
+                }
+            }
+            return deadEnds;
         }
     }
 }

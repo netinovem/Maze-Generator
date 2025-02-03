@@ -1,15 +1,13 @@
-﻿using SixLabors.ImageSharp;
-
-namespace Maze_Console
+﻿namespace Maze_Console
 {
     internal class DistanceGrid : Grid
     {
-        public Dictionary<Cell, int> distanceMap { get; set; }   
-        public DistanceGrid(int rows, int columns) : base(rows, columns) 
-        { 
+        public Dictionary<Cell, int> distanceMap { get; set; }
+
+        public DistanceGrid(int rows, int columns) : base(rows, columns)
+        {
             this.distanceMap = new Dictionary<Cell, int>();
         }
-        
 
         protected override string Contentsof(Cell cell)
         {
