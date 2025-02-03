@@ -16,7 +16,8 @@ namespace Maze_Console
                 Sidewinder.On,
                 AldousBroder.On,
                 Wilsons.On,
-                HuntAndKill.On
+                HuntAndKill.On,
+                RecursiveBacktracker.On,
             };
 
             Dictionary<string, double> averages = new Dictionary<string, double>();
@@ -45,7 +46,7 @@ namespace Maze_Console
             foreach (var algorithm in sortedAlgorithms)
             {
                 double percentage = algorithm.Value * 100.0 / totalCells;
-                Console.WriteLine($"{algorithm.Key,-14} : {algorithm.Value,3:F0}/{totalCells} ({percentage:F2}%)");
+                Console.WriteLine($"{algorithm.Key,-20} : {algorithm.Value,3:F0}/{totalCells} ({percentage:F2}%)");
             }
         }
     }
