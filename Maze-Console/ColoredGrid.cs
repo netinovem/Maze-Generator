@@ -33,11 +33,12 @@ namespace Maze_Console
         protected override Color? BackgroundColorFor(Cell cell)
         {
             if (distanceMap[cell] == null) return null;
-            
+
             int? distance = distanceMap[cell];
-            float intesity = (float) (maximum - distance) / maximum;
-            byte dark = (byte)Math.Round((intesity * 255));
-            byte bright =(byte)(Math.Round((intesity * 127)) + 128);
+            float intensity = (float)(maximum - distance) / maximum;
+
+            byte bright = (byte)(intensity * 240);
+            byte dark = (byte)(60 * intensity);
 
             return Color.FromRgb(dark, bright, dark);
         }
