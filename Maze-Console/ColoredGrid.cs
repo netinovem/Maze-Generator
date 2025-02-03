@@ -1,4 +1,6 @@
 ﻿using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.ColorSpaces;
+using ColorHelper;
 
 
 namespace Maze_Console
@@ -33,14 +35,19 @@ namespace Maze_Console
         protected override Color? BackgroundColorFor(Cell cell)
         {
             if (distanceMap[cell] == null) return null;
-
             int? distance = distanceMap[cell];
+
+            // SINGLE SHADE OF COLOR
             float intensity = (float)(maximum - distance) / maximum;
-
-            byte bright = (byte)(intensity * 240);
-            byte dark = (byte)(60 * intensity);
-
+            byte bright = (byte)(intensity * 200);
+            byte dark = (byte)(30 * intensity);
             return Color.FromRgb(dark, bright, dark);
+
+            // MORE COLORFUL VERSION
+            //int hue = (int)Math.Floor(100 - (100 * ((decimal)distance / maximum)));
+            //HSL hsl = new HSL(hue, 100, 50);
+            //RGB rgb = ColorHelper.ColorConverter.HslToRgb(hsl);
+            //return Color.FromRgb(rgb.R, rgb.G, rgb.B);
         }
     }
 }

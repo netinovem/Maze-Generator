@@ -33,12 +33,11 @@ namespace Maze_Console
             //Distances distancesMap = start.Distances();
             //distanceGrid.distanceMap = distancesMap.ToDictionary();
 
-            ColoredGrid coloredGrid = new ColoredGrid(60, 60);
+            ColoredGrid coloredGrid = new ColoredGrid(10, 10);
             HuntAndKill.On(coloredGrid);
-            Cell start = coloredGrid[0 ,0];
+            Cell start = coloredGrid[coloredGrid.rows/2 ,coloredGrid.columns/2];
             Distances distanceMap = start.Distances();
             coloredGrid.distanceMap = distanceMap;
-            //coloredGrid.distanceMap = start.Distances();
             var img = coloredGrid.ToImg(30,60);
             
             img.SaveAsPng("C:\\Users\\netinova\\Desktop\\Maze\\Maze-Console\\generated-mazes\\maze3.png");
