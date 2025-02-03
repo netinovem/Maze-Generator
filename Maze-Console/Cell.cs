@@ -48,7 +48,7 @@
             return links.ContainsKey(cell);
         }
 
-        public List<Cell> Neighbors(Cell cell)
+        public List<Cell> Neighbors()
         {
             List<Cell> neighbors = new List<Cell>();
 

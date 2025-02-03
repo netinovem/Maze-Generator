@@ -16,7 +16,7 @@ namespace Maze_Console
             while (unvisited > 0)
             {
                 //picking a random neighbor
-                Cell neighbor = cell.Neighbors(cell)[new Random().Next(cell.Neighbors(cell).Count)];
+                Cell neighbor = cell.Neighbors()[new Random().Next(cell.Neighbors().Count)];
 
                 if (neighbor.links.Count == 0)
                 {

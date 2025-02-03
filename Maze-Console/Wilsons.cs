@@ -30,7 +30,7 @@ namespace Maze_Console
                 //continue the loop until we find a cell that's part of an existing path
                 while (unvisited.Contains(cell))
                 {
-                    cell = cell.Neighbors(cell)[new Random().Next(cell.Neighbors(cell).Count)];
+                    cell = cell.Neighbors()[new Random().Next(cell.Neighbors().Count)];
 
                     //check if we have already visited this cell  
                     int position = path.IndexOf(cell);

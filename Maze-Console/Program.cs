@@ -33,9 +33,9 @@ namespace Maze_Console
             //Distances distancesMap = start.Distances();
             //distanceGrid.distanceMap = distancesMap.ToDictionary();
 
-            ColoredGrid coloredGrid = new ColoredGrid(40, 40);
-            Wilsons.On(coloredGrid);
-            Cell start = coloredGrid[coloredGrid.rows/2 , coloredGrid.columns/2];
+            ColoredGrid coloredGrid = new ColoredGrid(60, 60);
+            HuntAndKill.On(coloredGrid);
+            Cell start = coloredGrid[0 ,0];
             Distances distanceMap = start.Distances();
             coloredGrid.distanceMap = distanceMap;
             //coloredGrid.distanceMap = start.Distances();
