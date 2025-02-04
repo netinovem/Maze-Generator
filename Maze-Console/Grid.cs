@@ -11,7 +11,7 @@ namespace Maze_Console
         public int rows { get; private set; }
         public int columns { get; private set; }
 
-        private Cell[,] grid;
+        protected Cell[,] grid;
 
         public Grid(int rows, int columns)
         {
@@ -72,7 +72,7 @@ namespace Maze_Console
             }
         }
 
-        public Cell RandomCell()
+        public virtual Cell RandomCell()
         {
             Random random = new Random();
             int row = random.Next(rows);
@@ -80,7 +80,7 @@ namespace Maze_Console
             return grid[row, column];
         }
 
-        public int Size()
+        public virtual int Size()
         {
             return rows * columns;
         }
@@ -171,6 +171,8 @@ namespace Maze_Console
             {
                 foreach (var cell in EachCell())
                 {
+                    if (cell == null) continue;
+
                     int x1 = cell.column * cellSize + margin;
                     int y1 = cell.row * cellSize + margin;
                     int x2 = (cell.column + 1) * cellSize + margin;
