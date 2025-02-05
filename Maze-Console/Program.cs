@@ -19,18 +19,17 @@ namespace Maze_Console
             //img.SaveAsPng("..\\..\\..\\generated-mazes\\maze3.png");
             //Process.Start(new ProcessStartInfo("..\\..\\..\\generated-mazes\\maze3.png") { UseShellExecute = true });
 
-            //DeadEndsCountTest.RunTest(100, 20); 
-
+            //DeadEndsCountTest.RunTest(100, 20);
 
             //Masking -----------------
             MaskedGrid maskedGrid = new(Mask.FromTxt("..\\..\\..\\masks\\mask.txt"));
             RecursiveBacktracker.On(maskedGrid);
-            Cell start = maskedGrid[0, 0];
+            Cell start = maskedGrid[0, 1];
+            ColoredGrid coloredMaskedGrid = maskedGrid.ToColoredGrid(start);
 
-            var img = maskedGrid.ToImg(60,60);
+            var img = coloredMaskedGrid.ToImg(60, 60);
             img.SaveAsPng("..\\..\\..\\generated-mazes\\maskedmaze.png");
             Process.Start(new ProcessStartInfo("..\\..\\..\\generated-mazes\\maskedmaze.png") { UseShellExecute = true });
-
         }
     }
 }

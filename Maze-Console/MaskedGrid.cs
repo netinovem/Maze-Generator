@@ -24,14 +24,14 @@ namespace Maze_Console
                 for (int column = 0; column < columns; column++)
                 {
                     if (mask[row, column]) grid[row, column] = new Cell(row, column);
-                    else grid[row, column] = null; 
+                    else grid[row, column] = null;
                 }
             }
         }
 
         public override Cell RandomCell()
         {
-            (int row,int column) = mask.RandomLocation();
+            (int row, int column) = mask.RandomLocation();
 
             return this[row, column];
         }
@@ -39,6 +39,21 @@ namespace Maze_Console
         public override int Size()
         {
             return mask.Count();
+        }
+
+        private Distances GetDistances(Cell root)
+        {
+            var distances = root.Distances();
+            return distances;
+        }
+
+        public ColoredGrid ToColoredGrid(Cell root)
+        {
+            var distanceMap = GetDistances(root);
+            var coloredGrid = new ColoredGrid(mask.rows, mask.columns);
+            coloredGrid.grid = this.grid;
+            coloredGrid.distanceMap = distanceMap;
+            return coloredGrid;
         }
     }
 }
