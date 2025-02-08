@@ -47,5 +47,10 @@ namespace Maze_Console
             //RGB rgb = ColorHelper.ColorConverter.HslToRgb(hsl);
             //return Color.FromRgb(rgb.R, rgb.G, rgb.B);
         }
+
+        public void SetGrid(Cell[,] grid)
+        {
+            this.grid = grid;
+        }
     }
 }

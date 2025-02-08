@@ -11,7 +11,7 @@ namespace Maze_Console
         public int rows { get; private set; }
         public int columns { get; private set; }
 
-        public Cell[,] grid;
+        protected Cell[,] grid;
 
         public Grid(int rows, int columns)
         {

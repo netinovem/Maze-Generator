@@ -51,7 +51,7 @@ namespace Maze_Console
         {
             var distanceMap = GetDistances(root);
             var coloredGrid = new ColoredGrid(mask.rows, mask.columns);
-            coloredGrid.grid = this.grid;
+            coloredGrid.SetGrid(this.grid);
             coloredGrid.distanceMap = distanceMap;
             return coloredGrid;
         }
