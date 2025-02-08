@@ -1,99 +1,96 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Maze_Console;
 
-namespace Maze_Console
+internal class Mask
 {
-    internal class Mask
+    public int rows { get; private set; }
+    public int columns { get; private set; }
+
+    public bool[,] bits;
+
+    public Mask(int rows, int columns)
     {
-        public int rows { get; private set; }
-        public int columns { get; private set; }
+        this.rows = rows;
+        this.columns = columns;
+        bits = new bool[rows, columns];
 
-        public bool[,] bits;
-
-        public Mask(int rows, int columns)
+        //initialize all bits to true
+        foreach (var row in Enumerable.Range(0, rows))
         {
-            this.rows = rows;
-            this.columns = columns;
-            bits = new bool[rows, columns];
-
-            //initialize all bits to true
-            foreach (var row in Enumerable.Range(0, rows))
+            foreach (var column in Enumerable.Range(0, columns))
             {
-                foreach (var column in Enumerable.Range(0, columns))
-                {
-                    bits[row, column] = true;
-                }
+                bits[row, column] = true;
             }
         }
+    }
 
-        public bool this[int row, int column]
+    public bool this[int row, int column]
+    {
+        get
         {
-            get {
-                if (row >= 0 && row < rows && column >= 0 && column < columns) return bits[row, column];
-                else return false;
-            }
-
-            set {
-                if (row >= 0 && row < rows && column >= 0 && column < columns) bits[row, column] = value;
-            }  
+            if (row >= 0 && row < rows && column >= 0 && column < columns)
+                return bits[row, column];
+            else
+                return false;
         }
-
-        public int Count()
+        set
         {
-            int count = 0;
-
-            foreach (var row in Enumerable.Range(0, rows))
-            {
-                foreach (var column in Enumerable.Range(0, columns))
-                {
-                    if (bits[row, column]) count++;
-                }
-            }
-
-            return count;
+            if (row >= 0 && row < rows && column >= 0 && column < columns)
+                bits[row, column] = value;
         }
+    }
 
-        public (int row, int column) RandomLocation()
+    public int Count()
+    {
+        int count = 0;
+
+        foreach (var row in Enumerable.Range(0, rows))
         {
-            while (true)
+            foreach (var column in Enumerable.Range(0, columns))
             {
-                int row = new Random().Next(0, rows);
-                int column = new Random().Next(0, columns);
-
                 if (bits[row, column])
-                {
-                    return (row, column);   
-                }
+                    count++;
             }
         }
 
-        public static Mask FromTxt(string file)
+        return count;
+    }
+
+    public (int row, int column) RandomLocation()
+    {
+        while (true)
         {
-            var lines = File.ReadAllLines(file);
+            int row = new Random().Next(0, rows);
+            int column = new Random().Next(0, columns);
 
-            while (lines.Length > 0 && string.IsNullOrWhiteSpace(lines[^1]))
+            if (bits[row, column])
             {
-                Array.Resize(ref lines, lines.Length - 1);
+                return (row, column);
             }
+        }
+    }
 
-            int rows = lines.Length;
-            int columns = lines[0].Length;
-            var mask = new Mask(rows, columns);
- 
-            for (int row = 0; row < rows; row++)
-            {
-                for (int col = 0; col < columns; col++)
-                {
-                    // Set the mask cell based on the character read from the file  
-                    mask[row, col] = lines[row][col] != 'X'; // true for '.', false for 'X'  
-                }
-            }
+    public static Mask FromTxt(string file)
+    {
+        var lines = File.ReadAllLines(file);
 
-            return mask;
+        while (lines.Length > 0 && string.IsNullOrWhiteSpace(lines[^1]))
+        {
+            Array.Resize(ref lines, lines.Length - 1);
         }
 
+        int rows = lines.Length;
+        int columns = lines[0].Length;
+        var mask = new Mask(rows, columns);
+
+        for (int row = 0; row < rows; row++)
+        {
+            for (int col = 0; col < columns; col++)
+            {
+                // Set the mask cell based on the character read from the file
+                mask[row, col] = lines[row][col] != 'X'; // true for '.', false for 'X'
+            }
+        }
+
+        return mask;
     }
 }

@@ -1,27 +1,26 @@
-﻿namespace Maze_Console
+﻿namespace Maze_Console;
+
+internal class AldousBroder
 {
-    internal class AldousBroder
+    public static Grid On(Grid grid)
     {
-        public static Grid On(Grid grid)
+        Cell cell = grid.RandomCell();
+        int unvisited = grid.Size() - 1;
+
+        while (unvisited > 0)
         {
-            Cell cell = grid.RandomCell();
-            int unvisited = grid.Size() - 1;
+            //picking a random neighbor
+            Cell neighbor = cell.Neighbors()[new Random().Next(cell.Neighbors().Count)];
 
-            while (unvisited > 0)
+            if (neighbor.links.Count == 0)
             {
-                //picking a random neighbor
-                Cell neighbor = cell.Neighbors()[new Random().Next(cell.Neighbors().Count)];
-
-                if (neighbor.links.Count == 0)
-                {
-                    cell.Link(neighbor);
-                    unvisited--;
-                }
-
-                cell = neighbor;
+                cell.Link(neighbor);
+                unvisited--;
             }
 
-            return grid;
+            cell = neighbor;
         }
+
+        return grid;
     }
 }

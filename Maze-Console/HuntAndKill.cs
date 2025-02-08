@@ -1,49 +1,52 @@
-﻿namespace Maze_Console
+﻿namespace Maze_Console;
+
+// todo: improve readability
+
+internal class HuntAndKill
 {
-    internal class HuntAndKill
+    public static Grid On(Grid grid)
     {
-        public static Grid On(Grid grid)
+        Cell current = grid.RandomCell();
+
+        while (current != null)
         {
-            Cell current = grid.RandomCell();
+            List<Cell> unvisitedNeighbors = new List<Cell>();
 
-            while (current != null)
+            foreach (Cell neighbor in current.Neighbors())
             {
-                List<Cell> unvisitedNeighbors = new List<Cell>();
+                if (neighbor.links.Count == 0)
+                    unvisitedNeighbors.Add(neighbor);
+            }
 
-                foreach (Cell neighbor in current.Neighbors())
+            if (unvisitedNeighbors.Count != 0) //Kill mode
+            {
+                Cell neighbor = unvisitedNeighbors[new Random().Next(unvisitedNeighbors.Count)]; //pick a random unvisited neighbor
+                current.Link(neighbor);
+                current = neighbor;
+            }
+            else //Hunt mode
+            {
+                current = null;
+                foreach (Cell cell in grid.EachCell())
                 {
-                    if (neighbor.links.Count == 0) unvisitedNeighbors.Add(neighbor);
-                }
-
-                if (unvisitedNeighbors.Count != 0) //Kill mode
-                {
-                    Cell neighbor = unvisitedNeighbors[new Random().Next(unvisitedNeighbors.Count)]; //pick a random unvisited neighbor
-                    current.Link(neighbor);
-                    current = neighbor;
-                }
-                else //Hunt mode
-                {
-                    current = null;
-                    foreach (Cell cell in grid.EachCell())
+                    List<Cell> visitedNeighbors = new List<Cell>();
+                    foreach (Cell neighbor in cell.Neighbors())
                     {
-                        List<Cell> visitedNeighbors = new List<Cell>();
-                        foreach (Cell neighbor in cell.Neighbors())
-                        {
-                            if (neighbor.links.Count > 0) visitedNeighbors.Add(neighbor);
-                        }
+                        if (neighbor.links.Count > 0)
+                            visitedNeighbors.Add(neighbor);
+                    }
 
-                        if (cell.links.Count == 0 && visitedNeighbors.Count > 0)
-                        {
-                            current = cell;
-                            Cell neighbor = visitedNeighbors[new Random().Next(visitedNeighbors.Count)];
-                            current.Link(neighbor);
-                            break;
-                        }
+                    if (cell.links.Count == 0 && visitedNeighbors.Count > 0)
+                    {
+                        current = cell;
+                        Cell neighbor = visitedNeighbors[new Random().Next(visitedNeighbors.Count)];
+                        current.Link(neighbor);
+                        break;
                     }
                 }
             }
-
-            return grid;
         }
+
+        return grid;
     }
 }

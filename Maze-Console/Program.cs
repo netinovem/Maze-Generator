@@ -1,5 +1,5 @@
-﻿using SixLabors.ImageSharp;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using SixLabors.ImageSharp;
 
 namespace Maze_Console;
 
@@ -29,7 +29,12 @@ internal class Program
 
         var img = coloredMaskedGrid.ToImg(60, 60);
         img.SaveAsPng("..\\..\\..\\generated-mazes\\maskedmaze.png");
-        Process.Start(new ProcessStartInfo("..\\..\\..\\generated-mazes\\maskedmaze.png") { UseShellExecute = true });
+        Process.Start(
+            new ProcessStartInfo("..\\..\\..\\generated-mazes\\maskedmaze.png")
+            {
+                UseShellExecute = true,
+            }
+        );
 
         //pushing the limits ----------------
         //Grid maze = new(4600, 4600);

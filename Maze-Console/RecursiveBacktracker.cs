@@ -14,7 +14,8 @@ internal class RecursiveBacktracker
             //Create a list of unvisited neighbors of the current cell
             List<Cell> neighbors = current.Neighbors().Where(c => c.links.Count == 0).ToList(); //I learned some new syntax since last time HAHAHAHAH.
 
-            if (neighbors.Count == 0) stack.Pop();
+            if (neighbors.Count == 0)
+                stack.Pop();
             else
             {
                 Cell neighbor = neighbors[new Random().Next(neighbors.Count)];
@@ -37,7 +38,8 @@ internal class RecursiveBacktracker
             Cell current = stack.Peek();
             List<Cell> neighbors = current.Neighbors().Where(c => c.links.Count == 0).ToList();
 
-            if (neighbors.Count == 0) stack.Pop();
+            if (neighbors.Count == 0)
+                stack.Pop();
             else
             {
                 Cell neighbor = neighbors[new Random().Next(neighbors.Count)];
